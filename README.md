@@ -126,8 +126,8 @@ Dagster on the other hand is used to:
 
    * Serve dashboards via `dbt docs`
 
->[!TIP]
->Note: Coming soon — still under development.
+>[!NOTE]
+>Coming soon - still under development.
 
 4. **Business Insights (Streamlit + LLM Queries)**
 
