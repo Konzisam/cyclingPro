@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_erp_cust_info
+    description: "Staging model for ERP customer data with cleaned IDs, birthdates, and normalized gender"
+    columns:
+      - name: customer_id
+        description: "Customer ID with 'NAS' prefix removed if present"
+        tests:
+          - not_null
+          - unique
+
+      - name: birth_date
+        description: "Birthdate of the customer, with future dates set to NULL"
+        tests:
+          - check_for_date_validity
+      - name: gender
+        description: "Normalized gender, with possible values of 'Male', 'Female', or 'n/a'"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Male', 'Female', 'n/a']

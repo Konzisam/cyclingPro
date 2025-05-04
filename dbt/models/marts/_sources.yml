@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: staging_data
+    database: cycling_pro # snowflake ->  cycling_pro duckDb -> crm_erp_data
+    schema: staging
+    tables:
+      - name: stg_crm_cust_info
+      - name: stg_crm_prd_info
+      - name: stg_crm_sales_details
+      - name: stg_erp_cust_info
+      - name: stg_erp_location
+      - name: stg_erp_prod_category

@@ -1,0 +1,37 @@
+cyclingPro:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      schema: staging
+      path: "../dlt_pipelines/crm_erp_data.duckdb"
+      threads: 1
+
+
+    prod:
+      type: snowflake
+      schema: staging
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      user: "{{ env_var('SNOWFLAKE_USERNAME') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      account: "{{ env_var('SNOWFLAKE_HOST') }}"
+      threads: 1
+#    marts:
+#      type: duckdb
+#      schema: production
+#      path: "../dlt_pipelines/crm_erp_data.duckdb"
+#      threads: 2
+
+#    dev:
+#      type: snowflake
+#      schema: staging
+#      database: "dagster_db"
+#      warehouse: "dagster_wh"
+#      role: "dagster_role"
+#      user: "{{ env_var('SNOWFLAKE_USER') }}"
+#      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+#      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+#      threads: 2
+#

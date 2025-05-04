@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_data # thhis is just a name for the source
+    database: crm_erp_data # snowflake ->  cycling_pro duckDb -> crm_erp_data
+    schema: crm_erp_data_raw
+    tables:
+      - name: crm_cust_info
+      - name: crm_prd_info
+      - name: crm_sales_details
+      - name: erp_cust_az12
+      - name: erp_loc_a101
+      - name: erp_px_cat_g1v2

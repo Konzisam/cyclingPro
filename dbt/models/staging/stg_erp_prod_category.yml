@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_erp_prod_category
+    description: Staged ERP product category data with cleaned and normalized values.
+    columns:
+      - name: id
+        description: Unique identifier for the product category.
+        tests:
+          - not_null
+          - unique
+
+      - name: category
+        description: Main product category, cleaned and uppercased.
+
+      - name: subcategory
+        description: Subcategory of the product, cleaned and uppercased.
+
+      - name: maintenance
+        description: Maintenance classification, cleaned and uppercased.

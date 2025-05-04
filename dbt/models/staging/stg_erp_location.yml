@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_erp_location
+    description: "Staging model for ERP location data with cleaned customer IDs and normalized country codes"
+    columns:
+      - name: customer_id
+        description: "Customer ID with dashes removed and converted to uppercase"
+        tests:
+          - not_null
+          - unique
+
+      - name: country
+        description: "Normalized country, with specific codes mapped to full country names"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Germany', 'United States', 'n/a']

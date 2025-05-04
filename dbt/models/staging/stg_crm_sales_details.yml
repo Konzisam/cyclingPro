@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_crm_sales_details
+    description: "Staging model for CRM sales details with cleaned dates and recalculated values"
+    columns:
+      - name: sls_ord_num
+        description: "Sales order number"
+        tests:
+          - not_null
+
+      - name: sls_prd_key
+        description: "Product key associated with the sale"
+        tests:
+          - not_null
+
+      - name: sls_cust_id
+        description: "Customer ID for the sale"
+        tests:
+          - not_null
+
+      - name: sls_order_dt
+        description: "Order date, safely cast from raw field"
+
+      - name: sls_ship_dt
+        description: "Shipping date, safely cast from raw field"
+
+      - name: sls_due_dt
+        description: "Due date, safely cast from raw field"
+
+      - name: sls_sales
+        description: "Total sales amount, recalculated if inconsistent"
+
+      - name: sls_quantity
+        description: "Quantity of products sold"
+
+      - name: sls_price
+        description: "Price per unit, derived when original is missing or invalid"

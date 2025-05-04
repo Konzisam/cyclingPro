@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_crm_prd_info
+    description: "Product staging table with transformed keys and normalized values"
+    columns:
+      - name: prd_id
+        description: "Unique product ID"
+        tests:
+          - not_null
+          - unique
+      - name: category_id
+        description: "Derived category ID from product key"
+      - name: prd_key
+        description: "Product key without category prefix"
+      - name: prd_number
+        description: "Product name"
+        tests:
+          - no_leading_trailing_spaces_for_cst_key
+      - name: prd_cost
+        description: "Cost of the product"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: prd_line
+        description: "Normalized product line (e.g., Mountain, Road, Touring)"
+      - name: prd_start_date
+        description: "Start date of the product"
+      - name: prd_end_date
+        description: "End date of the product based on next start date"

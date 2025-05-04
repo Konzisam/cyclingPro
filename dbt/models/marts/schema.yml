@@ -1,0 +1,125 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Customer dimension combining CRM and ERP sources.
+    columns:
+      - name: customer_key
+        description: Surrogate key generated via ROW_NUMBER.
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: CRM customer identifier.
+
+      - name: customer_number
+        description: Internal customer number from CRM.
+
+      - name: first_name
+        description: Cleaned and standardized first name.
+
+      - name: last_name
+        description: Cleaned and standardized last name.
+
+      - name: country
+        description: Standardized country name from ERP location.
+
+      - name: marital_status
+        description: Standardized marital status from CRM.
+
+      - name: gender
+        description: Gender from CRM or fallback to ERP.
+
+      - name: birth_date
+        description: Birthdate from ERP.
+
+      - name: create_date
+        description: First CRM create date for customer record.
+
+
+  - name: dim_products
+    description: Product dimension combining CRM and ERP sources.
+    columns:
+      - name: product_key
+        description: Surrogate key generated via ROW_NUMBER.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        description: Unique product identifier from CRM.
+
+      - name: product_number
+        description: Internal product number from CRM.
+
+      - name: product_name
+        description: Cleaned and standardized product name.
+
+      - name: category_id
+        description: Category identifier from CRM.
+
+      - name: category
+        description: Standardized product category from ERP.
+
+      - name: subcategory
+        description: Standardized product subcategory from ERP.
+
+      - name: maintenance
+        description: Maintenance status from ERP.
+
+      - name: cost
+        description: Product cost from CRM.
+
+      - name: product_line
+        description: Product line associated with the product.
+
+      - name: start_date
+        description: Product start date.
+        tests:
+          - not_null
+
+
+  - name: fact_sales
+    description: "This model aggregates sales data by joining sales, products, and customers data."
+    columns:
+      - name: order_key
+        description: "Surrogate key for the sales order"
+        tests:
+          - not_null
+          - unique
+      - name: order_number
+        description: "The unique order number"
+        tests:
+          - not_null
+      - name: product_key
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+      - name: customer_key
+        description: "The unique identifier for the customer"
+        tests:
+          - not_null
+      - name: order_date
+        description: "The date when the order was placed"
+
+      - name: shipping_date
+        description: "The date when the order was shipped"
+        tests:
+          - check_for_date_validity
+      - name: due_date
+        description: "The date when the order is expected to be delivered"
+        tests:
+          - check_for_date_validity
+      - name: sales_amount
+        description: "The total amount of the sales"
+        tests:
+          - not_null
+      - name: quantity
+        description: "The quantity of items ordered"
+        tests:
+          - not_null
+      - name: price
+        description: "The price per unit for the product"
+        tests:
+          - not_null
