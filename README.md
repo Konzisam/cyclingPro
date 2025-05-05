@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Konzisam/cyclingPro/blob/master/docs/images/bike.jpeg" alt="logo" />
+  <img src="https://github.com/Konzisam/cyclingPro/blob/master/docs/images/bike.jpeg" alt="logo" width="150"/>
 </p>
 
 # Cycling Pro Data Platform – Case Study
@@ -127,7 +127,7 @@ Dagster on the other hand is used to:
    * Serve dashboards via `dbt docs`
 
 >[!NOTE]
->Coming soon - still under development.
+>_Coming soon - still under development._
 
 4. **Business Insights (Streamlit + LLM Queries)**
 
