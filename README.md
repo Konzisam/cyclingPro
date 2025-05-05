@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Konzisam/cyclingPro/blob/master/docs/images/bike.jpeg" alt="logo" width="150"/>
+  <img src="https://github.com/Konzisam/cyclingPro/blob/master/docs/images/bike.jpeg" alt="logo" width="250"/>
 </p>
 
 # Cycling Pro Data Platform – Case Study
