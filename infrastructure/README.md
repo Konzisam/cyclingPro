@@ -1,6 +1,6 @@
 ## Snowflake Setup with Terraform
->[!TIP]
->Note: The project can be run using the free trial.
+>[!NOTE]
+>The project can be run using the free trial.
 
 * The best practise when working with snowflake and tools such as Terraform is to create a role , granting only the permissions it needs. 
 
@@ -55,7 +55,7 @@ GRANT ROLE TERRAFORM_ADMIN TO USER TERRAFORM_USER;
 -- view users
 SHOW USERS;
 ```
->[!TIP]
+>[!NOTE]
 >Note: If we want to .
 ALTER WAREHOUSE cycling_pro_wh RESUME;
 

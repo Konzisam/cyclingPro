@@ -60,11 +60,14 @@ These analytics aim to provide key performance indicators (KPIs) and interactive
 ## Technical Architecture & Approach
 To meet these goals, the following objectives were established, with careful technology selections made to ensure scalability, flexibility, and maintainability:
 
+
 * #### Centralized Data Lake / Warehouse
 
     _**Reason:**_ Consolidating data from ERP, CRM, and sales systems into a single source of truth eliminates data silos, ensures consistency, and enables holistic analytics.
   * **Snowflake as a Data Warehouse:** - Snowflake’s ability to scale compute independently and cost-efficiency, to support analytical workloads, and simplify data integration without the need for infrastructure management, making it well-suited for consolidating ERP and CRM data into a single analytical environment
   * **DuckDB for Local Warehouse Testing** -  Used as a lightweight, in-memory analytics database to simulate the data warehouse environment locally. This enables fast, efficient testing and validation of dbt models and transformations before deploying changes to production in Snowflake.
+
+
 
 * #### Scalable Pipeline using DLT, dbt, and Dagster
 
@@ -76,15 +79,19 @@ To meet these goals, the following objectives were established, with careful tec
 
   * **_Dagster:_** Offers orchestration with strong support for observability and modular pipeline design. Will be used to trigger the workflows on a schedule and provide visibility for successes or failures
 
+---
   
 ## Architecture
 <p align="center">
   <img src="./docs/images/architechture.png" alt="logo" />
 </p>
 
+---
+
 1. **Data Ingestion (dlt):**\
 Data from ERP and CRM systems is ingested from S3 into DuckDB/Snowflake as raw tables and defining schemas and metadata.
 
+---
 2. **Data Transformation (dbt):**
 * **Raw to staging**
   * Standardized naming conventions and cleaned textual data
@@ -117,6 +124,7 @@ Data from ERP and CRM systems is ingested from S3 into DuckDB/Snowflake as raw t
   
 **Marts:**  `dim_customers`,  `dim_products` and  `fact_sales`
 
+---
 3. **Orchestration (Dagster):** \
 Dagster on the other hand is used to:
 
@@ -127,10 +135,12 @@ Dagster on the other hand is used to:
    * Schedule jobs like `dbt build` and `docs generate`
 
    * Serve dashboards via `dbt docs`
+---
    
 4. **Duckdb and Snowflake DataWarehouse**
 
 A two-tiered data warehousing strategy was adopted to balance development efficiency with production scalability:
+
 * Duckdb Local UseCases:
 
   * Local testing of dbt SQL models with immediate feedback.
@@ -146,6 +156,8 @@ A two-tiered data warehousing strategy was adopted to balance development effici
 _A view of the data using DBeaver_
 
 This enables efficient model development in isolation before deploying to the production warehouse.
+
+
 * **Snowflake – Production Warehouse - Provisioned using Terraform**
   * Runs production dbt models using cloud compute resources.
 
@@ -158,6 +170,7 @@ This enables efficient model development in isolation before deploying to the pr
   * Enables role-based access and query tagging for governance and cost tracking.
 Terraform was used to provision all required infrastructure components, ensuring consistent and automated deployment of the data platform. The instructions to set up can be found [here](./infrastructure/README.md)
 
+---
 
 >[!NOTE]
 >_Coming soon - still under development._
