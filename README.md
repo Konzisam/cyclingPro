@@ -79,7 +79,6 @@ To meet these goals, the following objectives were established, with careful tec
 
   * **_Dagster:_** Offers orchestration with strong support for observability and modular pipeline design. Will be used to trigger the workflows on a schedule and provide visibility for successes or failures
 
----
   
 ## Architecture
 <p align="center">
@@ -141,7 +140,7 @@ Dagster on the other hand is used to:
 
 A two-tiered data warehousing strategy was adopted to balance development efficiency with production scalability:
 
-* Duckdb Local UseCases:
+* **Duckdb Local UseCases:**
 
   * Local testing of dbt SQL models with immediate feedback.
   * Simulating Snowflake behavior using the same SQL and macros.
@@ -172,7 +171,7 @@ Terraform was used to provision all required infrastructure components, ensuring
 
 ---
 
->[!NOTE]
+
 >_Coming soon - still under development._
 
 5. **Business Insights (Streamlit + LLM Queries)**
