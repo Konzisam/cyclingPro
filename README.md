@@ -78,7 +78,9 @@ To meet these goals, the following objectives were established, with careful tec
 
   
 ## Architecture
-#image
+<p align="center">
+  <img src="./docs/images/architechture.png" alt="logo" />
+</p>
 
 1. **Data Ingestion (dlt):**\
 Data from ERP and CRM systems is ingested from S3 into DuckDB/Snowflake as raw tables and defining schemas and metadata.
@@ -125,11 +127,42 @@ Dagster on the other hand is used to:
    * Schedule jobs like `dbt build` and `docs generate`
 
    * Serve dashboards via `dbt docs`
+   
+4. **Duckdb and Snowflake DataWarehouse**
+
+A two-tiered data warehousing strategy was adopted to balance development efficiency with production scalability:
+* Duckdb Local UseCases:
+
+  * Local testing of dbt SQL models with immediate feedback.
+  * Simulating Snowflake behavior using the same SQL and macros.
+
+  * Validating model relationships, filters, and joins before deployment.
+
+  * Rapid iteration during transformation logic development.
+
+  * Optional integration with tools like DBeaver for interactive querying.
+  
+![img.png](img.png)
+_A view of the data using DBeaver_
+
+This enables efficient model development in isolation before deploying to the production warehouse.
+* **Snowflake – Production Warehouse - Provisioned using Terraform**
+  * Runs production dbt models using cloud compute resources.
+
+  * Stores cleaned, modeled data (dim_, fact_) for BI consumption.
+
+  * Executes scheduled analytics workflows via Dagster.
+
+  * Hosts persistent data layers for real-time dashboard querying.
+
+  * Enables role-based access and query tagging for governance and cost tracking.
+Terraform was used to provision all required infrastructure components, ensuring consistent and automated deployment of the data platform. The instructions to set up can be found [here](./infrastructure/README.md)
+
 
 >[!NOTE]
 >_Coming soon - still under development._
 
-4. **Business Insights (Streamlit + LLM Queries)**
+5. **Business Insights (Streamlit + LLM Queries)**
 
 * **Streamlit Dashboards:** Interactive dashboards are created for real-time monitoring of key metrics (e.g., sales performance, inventory levels).
 
