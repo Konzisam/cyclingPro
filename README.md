@@ -186,7 +186,12 @@ Terraform was used to provision all required infrastructure components, ensuring
   * Incorrect configuration of dlt with dagster
 * During Loading and transformation of the data, there were some notable syntactical errors which I listed in this file along with how I handled them.
 
+## Conclusion
+* Building the Cycling Pro data platform was a rewarding experience that demonstrated how a modern data stack can be both powerful and accessible. By using tools like dlt, dbt, and Dagster, I was able to integrate disparate ERP and CRM data sources, transform them for analytics, and orchestrate the entire pipeline seamlessly.
 
+* What stood out most was the flexibility of writing pipelines in Python and testing transformations locally with DuckDB before scaling to Snowflake in production. This setup gave me full control during development while making the deployment process smooth and consistent.
+
+* The result is a modular, scalable, and analytics-ready platform that enables real-time insights and supports better decision-making for the business.
 
 
 

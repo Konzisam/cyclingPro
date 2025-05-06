@@ -41,12 +41,40 @@ def dbt_assets_cycling_pro(context: AssetExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
 
+# defs = Definitions(
+#     assets=[dbt_assets_cycling_pro],
+#     resources={
+#         "dbt": dbt_resource,
+#     },
+# )
+
+@op
+def generate_dbt_docs(context: AssetExecutionContext, dbt: DbtCliResource):
+    context.log.info(f"Generating dbt docs in: {dbt.project_dir}")
+
+    result = dbt.cli(["docs", "generate"], context=context)
+
+    for event in result.stream():
+        context.log.info(event.message)
+
+    target_path = Path(dbt.project_dir) / "target" / "index.html"
+    if target_path.exists():
+        context.log.info(f"Docs generated successfully at: {target_path}")
+    else:
+        context.log.warn(f"Docs not found at expected location: {target_path}")
+
+
+@job(resource_defs={"dbt": dbt_resource})
+def dbt_docs_job():
+    dbt_assets_cycling_pro()  # This triggers the dbt build
+    generate_dbt_docs()       # Then generates the docs
+
 defs = Definitions(
     assets=[dbt_assets_cycling_pro],
-    resources={
-        "dbt": dbt_resource,
-    },
+    jobs=[dbt_docs_job],
+    resources={"dbt": dbt_resource},
 )
+
 
 # @dbt_assets(manifest=dbt_project.manifest_path)
 # def dbt_assets_cycling_pro(context: AssetExecutionContext, dbt: DbtCliResource):
@@ -72,18 +100,18 @@ defs = Definitions(
 #
 #
 # # Op to serve DBT Docs (this will run in the background)
-@op
-def serve_dbt_docs(context):
-    """Runs dbt docs serve in the background to serve the docs"""
-    context.log.info("Starting DBT Docs server...")
-
-    # Start the 'dbt docs serve' command as a subprocess
-    process = subprocess.Popen(
-        ["dbt", "docs", "serve", "--port", "8000"],
-        cwd=DBT_PROJECT_PATH,  # Set the working directory for dbt project
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+# @op
+# def serve_dbt_docs(context):
+#     """Runs dbt docs serve in the background to serve the docs"""
+#     context.log.info("Starting DBT Docs server...")
+#
+#     # Start the 'dbt docs serve' command as a subprocess
+#     process = subprocess.Popen(
+#         ["dbt", "docs", "serve", "--port", "8000"],
+#         cwd=DBT_PROJECT_PATH,  # Set the working directory for dbt project
+#         stdout=subprocess.PIPE,
+#         stderr=subprocess.PIPE,
+#     )
 #
 #     # Log server output
 #     stdout, stderr = process.communicate()

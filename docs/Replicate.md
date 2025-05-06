@@ -45,8 +45,8 @@ If running locally with DuckDb then just start Dagster:
 ```
 DAGSTER_HOME=$(pwd) dagster dev
 ```
->[!TIP]
->dlt will create a file crm_erp_data.duckdb in the ??
+>[!NOTE]
+>dlt will create a file crm_erp_data.duckdb in the root file.
 
 
 ## Image
@@ -56,12 +56,12 @@ Further steps on:  **How to setup snowflake using terraform**
 View of the UI with snowflake
 
 
-## mage 
+## Image 
 
 ```
-* aws s3api create-bucket --bucket cyclingPro --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1
+aws s3api create-bucket --bucket cyclingPro --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1
 ```
-
+---
 
 In DuckDB, subtracting an integer (like 1) directly from a VARCHAR or DATE type without explicit casting causes a **Binder Error**. 
 
@@ -74,7 +74,7 @@ CAST(
 
 ```
 
-To
+Changes to: 
 ```
 CAST(
     CAST(LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt) AS DATE) - INTERVAL '1 day'
@@ -90,6 +90,7 @@ CAST(
     AS DATE
 ) AS prd_end_dt
 ```
+---
 Another problem is type casting:
 
 ```
@@ -98,7 +99,7 @@ Another problem is type casting:
     ELSE CAST(CAST(sls_order_dt AS VARCHAR) AS DATE)
   END AS sls_order_dt
 ```
-changes to 
+Changes to to explicitly typecast
 
 ```
     CASE 
@@ -107,7 +108,7 @@ changes to
     END AS sls_order_dt
 ```
 
-
+---
 `TO_DATE('20101229', 'YYYYMMDD')` is the correct function in Snowflake
 
 `STRPTIME(CAST({{ field_name }} AS STRING), '%Y%m%d') `
@@ -120,6 +121,8 @@ This doesnt work
 but this does:
 
 `{{ clean_and_upper("REPLACE(cid, '-', '')") }}`
+
+Probably, attention to the quotes
 
 
 

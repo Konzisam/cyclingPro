@@ -4,6 +4,7 @@ schedules/
 history/
 cyclingPro-session.txt
 *.egg-info
+__pycache__
 
 try.py
 
