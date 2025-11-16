@@ -4,11 +4,12 @@ schedules/
 history/
 cyclingPro-session.txt
 *.egg-info
-*/__pycache__
+*pycache*
+*.pyc
 
 try.py
 
-.env
+.env*
 
 logs/
 

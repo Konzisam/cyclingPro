@@ -151,7 +151,7 @@ A two-tiered data warehousing strategy was adopted to balance development effici
 
   * Optional integration with tools like DBeaver for interactive querying.
   
-![img.png](img.png)
+![img.png](docs/images/img.png)
 _A view of the data using DBeaver_
 
 This enables efficient model development in isolation before deploying to the production warehouse.

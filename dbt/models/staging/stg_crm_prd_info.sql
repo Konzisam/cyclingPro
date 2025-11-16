@@ -2,8 +2,8 @@
 
 SELECT
     prd_id,
-    REPLACE(SUBSTRING(prd_key, 1, 5), '-', '_') AS category_id, -- Extract category ID
-    SUBSTRING(prd_key, 7, LEN(prd_key)) AS prd_key,        -- Extract product key
+    REPLACE(SUBSTRING(prd_key, 1, 5), '-', '_') AS category_id,
+    SUBSTRING(prd_key, 7, LEN(prd_key)) AS prd_key,
     {{ clean_and_upper('prd_nm') }} AS prd_number,
     COALESCE(prd_cost, 0) AS prd_cost,
     {{ normalize_value(

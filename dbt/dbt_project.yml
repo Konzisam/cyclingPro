@@ -21,8 +21,10 @@ models:
   dbt_cyclingPro:
     staging:
       +schema: staging
+      +materialized: view
     marts:
       +schema: marts
+      +materialized: table
 
 
 
